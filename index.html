@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI Essentials: Tabbed Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            padding: 1rem;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-step {
+            position: relative;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+            background-color: #f7f7f7;
+            border-left: 4px solid #FC913A;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .tab-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-button.active {
+            background-color: #FF4E50;
+            color: #ffffff;
+            border-bottom-color: #FF4E50;
+            box-shadow: 0 4px 10px rgba(255, 78, 80, 0.5);
+        }
+        /* Custom timeline styles for elegance */
+        .timeline-step {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        /* Attention Visual */
+        .attention-bar {
+            height: 10px;
+            border-radius: 9999px;
+            transition: width 0.3s;
+        }
+        /* RAG Flow Visual */
+        .rag-node {
+            background-color: #FC913A;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+<!-- Vibrant Palette: #FF4E50 (Red), #FC913A (Orange), #F9D423 (Yellow), #EDE574 (Light Yellow), #E1F5C4 (Pale Green) -->
+
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-4xl font-extrabold text-center" style="color: #FF4E50;">Generative AI Essentials</h1>
+        </div>
+        <div class="border-t border-gray-200">
+            <div class="container mx-auto flex overflow-x-auto text-sm md:text-base">
+                <button class="tab-button active flex-1 py-3 px-2 text-center font-semibold text-gray-700 whitespace-nowrap border-b-4 border-transparent" data-tab="tab1">Foundations</button>
+                <button class="tab-button flex-1 py-3 px-2 text-center font-semibold text-gray-700 whitespace-nowrap border-b-4 border-transparent" data-tab="tab2">Core Architecture</button>
+                <button class="tab-button flex-1 py-3 px-2 text-center font-semibold text-gray-700 whitespace-nowrap border-b-4 border-transparent" data-tab="tab3">Lifecycle & Control</button>
+                <button class="tab-button flex-1 py-3 px-2 text-center font-semibold text-gray-700 whitespace-nowrap border-b-4 border-transparent" data-tab="tab4">Scope & Ethics</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- TAB 1: FOUNDATIONS & HISTORY -->
+        <div id="tab1" class="tab-content">
+            <h2 class="text-3xl font-bold mb-6 text-center" style="color: #FC913A;">History, Principles, and Input</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="lg:col-span-3 bg-white rounded-xl shadow-xl p-8 mb-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">History and Evolution of LLMs</h3>
+                    <p class="text-gray-600 mb-6 max-w-4xl mx-auto text-center">The journey from simple grammatical rules (symbolic AI) to today's massive, contextual, deep learning-based Generative AI models.</p>
+
+                    <div class="relative wrap overflow-hidden p-2 h-full max-w-4xl mx-auto">
+                        <!-- Vertical connecting line -->
+                        <div class="border-2 absolute border-gray-300 h-full border-dashed" style="left: 50%; transform: translateX(-50%);"></div>
+
+                        <!-- Step 1: Rule-Based -->
+                        <div class="flex justify-between items-center w-full right-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md bg-gray-100 text-right border-r-4 border-[#E1F5C4]">
+                                <h4 class="font-bold text-lg text-gray-800">1950s-90s: Rule-Based Systems</h4>
+                                <p class="text-sm">Grammar and logic rules were explicitly programmed. Systems were predictable but brittle and unable to handle nuance or real-world variation.</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #E1F5C4;">
+                                <span class="mx-auto font-bold text-sm" style="color: #4B5563;">1</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 2: Statistical -->
+                        <div class="flex justify-between flex-row-reverse items-center w-full left-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md bg-gray-100 text-left border-l-4 border-[#EDE574]">
+                                <h4 class="font-bold text-lg text-gray-800">2000s-2012: Statistical Models</h4>
+                                <p class="text-sm">Models used probabilities (e.g., Markov Chains) of words appearing together. Improved flexibility but still lacked deep contextual understanding across long sentences.</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #EDE574;">
+                                <span class="mx-auto font-bold text-sm" style="color: #4B5563;">2</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 3: Embeddings -->
+                        <div class="flex justify-between items-center w-full right-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md bg-gray-100 text-right border-r-4 border-[#F9D423]">
+                                <h4 class="font-bold text-lg text-gray-800">2013-2016: Word Embeddings (Word2Vec, ELMo)</h4>
+                                <p class="text-sm">The transition to <strong>Deep Learning</strong>. Words gained <strong>embeddings</strong> (numerical vector meanings). Recurrent Neural Networks (RNNs) like LSTMs struggled with long-range context.</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #F9D423;">
+                                <span class="mx-auto font-bold text-sm" style="color: #4B5563;">3</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 4: Transformer Architecture -->
+                        <div class="flex justify-between flex-row-reverse items-center w-full left-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md border-l-4" style="background-color: #FC913A; border-color: #FF4E50;">
+                                <h4 class="font-bold text-lg text-white">2017: The Transformer Era</h4>
+                                <p class="text-sm text-white">The paper "<strong>Attention Is All You Need</strong>" introduced the <strong>Transformer</strong>, utilizing parallel processing via <strong>Self-Attention</strong> to eliminate the sequential bottleneck of RNNs.</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #FC913A;">
+                                <span class="mx-auto font-bold text-sm text-white">4</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 5: BERT and GPT -->
+                        <div class="flex justify-between items-center w-full right-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md border-r-4" style="background-color: #FC913A; border-color: #FF4E50; text-align: right;">
+                                <h4 class="font-bold text-lg text-white">2018-2020: Encoder vs. Decoder</h4>
+                                <p class="text-sm text-white"><strong>BERT</strong> (Encoder-only) specialized in deep text <strong>understanding</strong>. <strong>GPT</strong> (Decoder-only) scaled the model size for powerful <strong>generation</strong> and conversation.</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #FC913A;">
+                                <span class="mx-auto font-bold text-sm text-white">5</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 6: Multi-Modality and Diffusion -->
+                        <div class="flex justify-between flex-row-reverse items-center w-full left-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md border-l-4" style="background-color: #FF4E50; border-color: #FC913A;">
+                                <h4 class="font-bold text-lg text-white">2021: Multi-Modality & Generative Expansion</h4>
+                                <p class="text-sm text-white"><strong>Diffusion Models</strong> (DALL-E) revolutionize image synthesis. <strong>Multi-Modal</strong> models (CLIP) emerge, linking text and visual concepts.</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #FF4E50;">
+                                <span class="mx-auto font-bold text-sm text-white">6</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+
+                        <!-- Step 7: Reasoning, Alignment, and Efficiency -->
+                        <div class="flex justify-between items-center w-full right-timeline timeline-step">
+                            <div class="order-1 w-5/12 p-4 rounded-lg shadow-md border-r-4" style="background-color: #F9D423; border-color: #FC913A; text-align: right;">
+                                <h4 class="font-bold text-lg text-gray-800">2022-Present: Alignment & Efficiency</h4>
+                                <p class="text-sm text-gray-800">Focus shifts to complex reasoning (<strong>Chain-of-Thought</strong>), human alignment (<strong>RLHF</strong>), and efficiency techniques like <strong>Quantization</strong> (making models smaller and faster).</p>
+                            </div>
+                            <div class="z-10 flex items-center order-1 w-8 h-8 rounded-full shadow-lg timeline-dot" style="background-color: #F9D423;">
+                                <span class="mx-auto font-bold text-sm" style="color: #4B5563;">7</span>
+                            </div>
+                            <div class="order-1 w-5/12"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1 bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Basic Principle / Working of LLMs</h3>
+                    <p class="text-gray-600 mb-4">At its core, an LLM is a powerful <strong>probabilistic next-token predictor</strong>. Its only learned task is to solve the <strong>Language Modeling Objective</strong>: predict the most statistically likely <strong>token</strong> (word part) to follow a given sequence. This capability is what allows it to generate coherent and contextual text.</p>
+                    
+                    <h4 class="font-bold text-lg mt-4" style="color: #FC913A;">The Three-Step Generation Loop</h4>
+                    <div class="space-y-4">
+                        <div class="flow-step text-center">
+                            <h4 class="font-bold text-lg" style="color: #FF4E50;">Step 1: Contextual Input to Vector</h4>
+                            <p class="text-gray-700 mb-2">The model converts the input (e.g., "The baker put the dough in the...") into numerical <strong>word vectors</strong> and feeds them into the Transformer layers.</p>
+                            <!-- Infographic for Step 1 -->
+                            <div class="flex justify-center items-center space-x-2 text-sm mt-2">
+                                <span class="text-gray-500 font-mono italic">"dough"</span>
+                                <span class="text-gray-400">&rarr;</span>
+                                <div class="bg-[#E1F5C4] px-2 py-1 rounded-sm font-mono font-bold text-xs" style="color: #4B5563;">[0.85]</div>
+                                <div class="bg-[#E1F5C4] px-2 py-1 rounded-sm font-mono font-bold text-xs" style="color: #4B5563;">[0.12]</div>
+                                <div class="bg-[#E1F5C4] px-2 py-1 rounded-sm font-mono font-bold text-xs" style="color: #4B5563;">[...0.54]</div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Embeddings capture meaning and are processed in parallel.</p>
+                        </div>
+                        <div class="flow-step text-center">
+                            <h4 class="font-bold text-lg" style="color: #FF4E50;">Step 2: Pattern Matching & Attention</h4>
+                            <p class="text-gray-700 mb-2">The <strong>Transformer</strong> layers analyze the full sequence and use <strong>Attention</strong> to assign high relevance scores to words like "baker" and "dough" when predicting the next word.</p>
+                            <!-- Infographic for Step 2 -->
+                            <div class="flex justify-center items-center text-sm mt-2">
+                                <span class="px-2 py-1 border border-gray-300 rounded-lg text-gray-500">The</span>
+                                <span class="px-2 py-1 bg-[#F9D423] text-gray-800 font-bold rounded-lg mx-1">dough</span>
+                                <span class="px-2 py-1 border border-gray-300 rounded-lg text-gray-500">in the</span>
+                                <span class="px-2 py-1 bg-[#FF4E50] text-white font-bold rounded-lg ml-3 shadow-md transform scale-105">?</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">This context leads to a list of potential next words.</p>
+                        </div>
+                        <div class="flow-step text-center">
+                            <h4 class="font-bold text-lg" style="color: #FF4E50;">Step 3: Probabilistic Generation</h4>
+                            <p class="text-gray-700 mb-2">The model outputs a probability distribution for the next token (e.g., Oven: 60%, Mixer: 20%). The system <strong>samples</strong> from this list to select the next token, which is then added to the input sequence, and the loop repeats.</p>
+                            <!-- Infographic for Step 3 - Probability Bars -->
+                            <div class="flex flex-col items-center mt-2 space-y-1">
+                                <div class="flex w-full items-center">
+                                    <div class="w-2/3 bg-[#FF4E50] h-6 rounded-l-md text-white text-xs font-bold flex items-center justify-start pl-2">Oven (60%)</div>
+                                    <div class="w-1/3 bg-gray-200 h-6 rounded-r-md"></div>
+                                </div>
+                                <div class="flex w-full items-center">
+                                    <div class="w-1/5 bg-[#FC913A] h-4 rounded-l-md text-white text-xs font-bold flex items-center justify-start pl-2">Mixer (20%)</div>
+                                    <div class="w-4/5 bg-gray-200 h-4 rounded-r-md"></div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">The sampling process (controlled by <strong>Temperature</strong>) introduces creativity vs. predictability.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1 bg-white rounded-xl shadow-xl p-6 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Tokenization</h3>
+                    <p class="text-center text-gray-600 mb-4"><strong>Tokenization</strong> is the critical first step: converting raw text into numerical <strong>tokens</strong> that the model can process. Modern LLMs use <strong>Subword Units</strong> (like <strong>Byte Pair Encoding, BPE</strong>) instead of whole words to achieve two main goals:
+                    <ol class="list-decimal list-inside text-sm text-gray-600 mt-2 space-y-1">
+                        <li><strong>Efficiency:</strong> Keeps the model's vocabulary manageable (around 50,000 unique tokens) even with billions of words.</li>
+                        <li><strong>Rare Words:</strong> Ensures *any* word, even proper nouns or typos, can be broken down into known subword parts, preventing unknown tokens.</li>
+                    </ol></p>
+                    
+                    <h4 class="text-xl font-bold mb-3 text-center" style="color: #FC913A;">Subword Tokenization Flow</h4>
+
+                    <!-- Custom Visual Infographic for BPE -->
+                    <div class="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-inner mb-4">
+                        <p class="text-sm font-bold mb-2">Input Word: <span class="text-lg font-mono" style="color: #FF4E50;">"unbelievable"</span></p>
+                        
+                        <!-- Step 1: Segmentation -->
+                        <div class="flex items-center space-x-2 my-2">
+                            <span class="text-2xl" style="color: #FC913A;">&#8600;</span>
+                            <div class="flex space-x-1">
+                                <span class="bg-[#E1F5C4] px-2 py-1 rounded text-sm font-mono">un</span>
+                                <span class="bg-[#EDE574] px-2 py-1 rounded text-sm font-mono">believ</span>
+                                <span class="bg-[#F9D423] px-2 py-1 rounded text-sm font-mono">able</span>
+                            </div>
+                            <span class="text-2xl" style="color: #FC913A;">&#8600;</span>
+                        </div>
+                        <p class="text-xs text-gray-500 italic">BPE finds the best way to segment the word based on frequent subword pairs.</p>
+
+                        <!-- Step 2: Mapping to IDs -->
+                        <div class="mt-3 flex flex-col items-center">
+                            <p class="font-bold text-sm mb-1" style="color: #FF4E50;">Token IDs (Input to LLM)</p>
+                            <div class="flex space-x-1">
+                                <span class="bg-gray-300 px-2 py-1 rounded text-xs font-bold text-gray-800">451</span>
+                                <span class="bg-gray-300 px-2 py-1 rounded text-xs font-bold text-gray-800">1239</span>
+                                <span class="bg-gray-300 px-2 py-1 rounded text-xs font-bold text-gray-800">67</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart for Token Composition -->
+                    <div class="chart-container">
+                        <canvas id="tokenizationChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-700 mt-2">Note: Shorter tokens lead to lower generation costs, but sometimes a single word is split into multiple tokens.</p>
+                </div>
+
+                <div class="lg:col-span-1 bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Word Embeddings</h3>
+                    <p class="text-gray-600 mb-4"><strong>Word Embeddings</strong> are dense numerical vectors that capture the <strong>meaning and context</strong> of a token. Think of it as a fingerprint in a <strong>high-dimensional space</strong> (a conceptual space with hundreds of axes). A token's position in this space is learned during pre-training based on the words it appears next to. The crucial principle is <strong>Semantic Similarity</strong>:
+                    <ul class="list-disc list-inside text-sm text-gray-600 mt-2">
+                        <li><strong>Close = Similar Meaning:</strong> Words like "cat" and "kitten" are mapped to points that are numerically close together.</li>
+                        <li><strong>Far = Different Meaning:</strong> Words like "cat" and "democracy" are mapped far apart.</li>
+                        <li><strong>Direction = Relationship:</strong> The vector path from "King" to "Man" is similar to the path from "Queen" to "Woman."</li>
+                    </ul></p>
+                    
+                    <h4 class="text-xl font-bold mb-3 text-center" style="color: #FC913A;">Semantic Clustering & Vector Math</h4>
+
+                    <div class="chart-container">
+                        <canvas id="embeddingsChart"></canvas>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg border border-gray-200 mt-4">
+                        <h4 class="font-bold text-lg mb-2" style="color: #FC913A;">Vector Math Example: Proportional Analogies</h4>
+                        <p class="text-sm font-mono leading-relaxed">Vector('King') - Vector('Man') + Vector('Woman') &asymp; <strong>Vector('Queen')</strong></p>
+                        <p class="text-xs text-gray-700 mt-2">The model understands the relationship (e.g., gender, royalty) as a quantifiable direction in the vector space, enabling complex reasoning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: CORE ARCHITECTURE -->
+        <div id="tab2" class="tab-content hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center" style="color: #FC913A;">Core Architecture</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-xl p-6 mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-center" style="color: #FF4E50;">Transformer Architecture</h3>
+                    <p class="text-gray-600 mb-4 max-w-4xl mx-auto">The <strong>Transformer</strong> is the revolutionary architecture that allowed LLMs to scale. It works primarily via <strong>parallel processing</strong> and is composed of repeating blocks that contain <strong>Attention</strong> and <strong>Feed-Forward Networks</strong>.</p>
+                    
+                    <h4 class="font-bold mt-4" style="color: #FC913A;">Structure: Encoder, Decoder, and Hybrid Roles</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-600 mb-4 space-y-1">
+                        <li><strong>Encoder:</strong> Focuses on deeply <strong>understanding</strong> the input sequence (e.g., classifying text, summarizing). Models like BERT use only this part.</li>
+                        <li><strong>Decoder:</strong> Focuses on <strong>generating</strong> new output sequences token-by-token (e.g., chat, creative writing). Models like GPT use only this part.</li>
+                        <li><strong>Encoder-Decoder (Hybrid):</strong> Used for tasks like machine translation, where the encoder reads the source language and the decoder generates the target language.</li>
+                        <li><strong>Residual Connections & Normalization:</strong> These critical components wrap around the layers. <strong>Residual Connections</strong> ensure the original data passes through, preventing deep models from "forgiving" early information. <strong>Layer Normalization</strong> stabilizes the data across the deep network.</li>
+                    </ul>
+                    
+                    <div class="chart-container mx-auto">
+                        <canvas id="transformerArchitectureChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-4">The shift from sequential (RNNs) to parallel processing allowed model size and training speed to increase dramatically.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Attention Mechanism</h3>
+                    <p class="text-gray-600 mb-4">The <strong>Attention Mechanism</strong> gives the Transformer the ability to <strong>prioritize</strong> context. When the model processes any single word, it calculates a <strong>focus weighting</strong> to determine how much all other words in the sequence matter to its current task. This is key to resolving linguistic dependencies and ambiguities.</p>
+                    
+                    <h4 class="font-bold mt-4 text-center" style="color: #FC913A;">Visualization: Contextual Focus Weighting</h4>
+                    
+                    <div class="flex flex-col items-center mt-4 p-4 bg-gray-100 rounded-lg shadow-inner">
+                        <p class="text-sm font-bold mb-3">Sentence: The <strong>animal</strong> didn't cross the road because <strong>it</strong> was too tired.</p>
+                        
+                        <div class="w-full space-y-3">
+                            <!-- Target Word -->
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-lg text-gray-800" style="color: #FF4E50;">Target: "it"</span>
+                                <span class="text-sm text-gray-600">Attention Weights (Focus)</span>
+                            </div>
+                            
+                            <!-- Animal -->
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm w-1/4">The <strong>animal</strong></span>
+                                <div class="w-3/4 bg-gray-200 rounded-full">
+                                    <div class="attention-bar w-[90%] bg-red-500 shadow-md flex items-center justify-end pr-2 text-xs font-bold text-white">90%</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Didn't cross -->
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm w-1/4">didn't cross</span>
+                                <div class="w-3/4 bg-gray-200 rounded-full">
+                                    <div class="attention-bar w-[15%] bg-yellow-500"></div>
+                                </div>
+                            </div>
+
+                            <!-- The Road -->
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm w-1/4">the <strong>road</strong></span>
+                                <div class="w-3/4 bg-gray-200 rounded-full">
+                                    <div class="attention-bar w-[5%] bg-yellow-500"></div>
+                                </div>
+                            </div>
+
+                            <!-- was too tired -->
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm w-1/4">was too tired</span>
+                                <div class="w-3/4 bg-gray-200 rounded-full">
+                                    <div class="attention-bar w-[60%] bg-orange-500"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-500 italic mt-3">The model assigns high focus (90%) to "animal" to resolve the reference of "it", ignoring less relevant words like "road".</p>
+                    </div>
+
+                    <h4 class="font-bold mt-4" style="color: #FC913A;">Multi-Head Attention</h4>
+                    <p class="text-sm text-gray-600 mt-2">Instead of one attention calculation, <strong>Multi-Head Attention</strong> runs the process <strong>multiple times in parallel</strong>. Each "head" learns a distinct type of relationship (e.g., one tracks syntax, another tracks topic). The results from all heads are then combined, providing a comprehensive and rich contextual understanding.</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Positional Encoding</h3>
+                    <p class="text-gray-600 mb-4">Because <strong>Attention</strong> processes all tokens simultaneously, the original <strong>sequence order</strong> is lost. <strong>Positional Encoding (PE)</strong> is the required patch. It adds a unique, mathematically generated vector (based on <strong>sine and cosine functions</strong>) to the embedding of every token. The benefit of sine/cosine is that they create predictable, distinct patterns that allow the model to calculate the <strong>relative distance</strong> between any two words, even without processing them in order.</p>
+                    
+                    <h4 class="font-bold text-lg mb-2 text-center" style="color: #FC913A;">PE Visualization: Order is Preserved</h4>
+
+                    <div class="flex flex-col items-center p-4 bg-gray-100 rounded-lg shadow-inner mt-4">
+                        
+                        <!-- Header row -->
+                        <div class="flex justify-between w-full text-center font-bold text-sm mb-2">
+                            <span class="w-1/4 text-gray-700">Position</span>
+                            <span class="w-1/4 text-gray-700">Word Vector (Meaning)</span>
+                            <span class="w-1/4" style="color: #FF4E50;">PE Vector (Order)</span>
+                            <span class="w-1/4" style="color: #FC913A;">Combined (Input)</span>
+                        </div>
+
+                        <!-- Example 1 (Position 1) -->
+                        <div class="flex justify-between items-center w-full my-1">
+                            <span class="w-1/4 text-center text-sm font-mono">1</span>
+                            <span class="w-1/4 text-center text-xs bg-[#E1F5C4] rounded-sm py-1">V_DOG</span>
+                            <span class="w-1/4 text-center text-xs bg-[#FF4E50] text-white rounded-sm py-1">PE_1</span>
+                            <span class="w-1/4 text-center text-xs bg-[#FC913A] text-white rounded-sm py-1 font-bold">V_DOG + PE_1</span>
+                        </div>
+                         <p class="text-center text-xs mt-2 italic text-gray-500">The combination at position 1 gives a unique context to the word "Dog".</p>
+
+                        <!-- Example 2 (Position 3) -->
+                        <div class="flex justify-between items-center w-full my-1">
+                            <span class="w-1/4 text-center text-sm font-mono">3</span>
+                            <span class="w-1/4 text-center text-xs bg-[#E1F5C4] rounded-sm py-1">V_MAN</span>
+                            <span class="w-1/4 text-center text-xs bg-[#F9D423] text-gray-800 rounded-sm py-1">PE_3</span>
+                            <span class="w-1/4 text-center text-xs bg-[#FC913A] text-white rounded-sm py-1 font-bold">V_MAN + PE_3</span>
+                        </div>
+                        <p class="text-center text-xs mt-2 italic text-gray-500">The same word "Man" combined with a different position vector (PE_3) results in a distinct input, preserving order.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: LIFECYCLE & CONTROL -->
+        <div id="tab3" class="tab-content hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center" style="color: #FC913A;">Lifecycle & Control</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="lg:col-span-1 bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Training Data & Pre-training: Building the Brain</h3>
+                    <p class="text-gray-600 mb-4">The <strong>Pre-training</strong> phase is the initial, massive training step where the model learns its foundational knowledge from a vast <strong>large corpus</strong> (public web data, books, code). This phase defines the model's <strong>knowledge coverage</strong> and grammatical fluency.</p>
+                    
+                    <h4 class="font-bold mt-4" style="color: #FC913A;">Primary Training Objectives</h4>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                        <li><strong>Next-Token Prediction:</strong> The model is trained to predict the next word in a sequence (e.g., "The cat sat on the <strong>mat</strong>"). This is used by <strong>Decoder-only</strong> models (like GPT) and teaches the model to generate text continuously.</li>
+                        <li><strong>Masked Language Modeling (MLM):</strong> The model is trained to fill in a "blank" word in the middle of a sentence (e.g., "The cat sat on the [<strong>MASK</strong>]"). This is used by <strong>Encoder-only</strong> models (like BERT) and teaches deep contextual understanding.</li>
+                    </ul>
+                    <p class="text-gray-600 mt-4 text-sm"><strong>Data Quality:</strong> Because the data is so massive, it contains noise and bias. <strong>Data Cleaning</strong> (removing toxicity, spam, and low-quality data) is essential to improve the resulting model's safety and quality.</p>
+                    <div class="chart-container">
+                        <canvas id="trainingDataChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Prompt Engineering: Giving Clear Instructions</h3>
+                    <p class="text-gray-600 mb-4"><strong>Prompt Engineering</strong> is the art of crafting precise instructions (<strong>the prompt</strong>) to guide the LLM toward a desired output. Since the model has immense potential but no explicit memory of past interactions, the prompt is the primary control mechanism. Proper technique can unlock greater reasoning and accuracy.</p>
+                    
+                    <h4 class="font-bold mt-4" style="color: #FC913A;">Visualization: Simple vs. Chain-of-Thought (CoT)</h4>
+                    <div class="grid grid-cols-2 gap-4 text-center mt-4">
+                        <div class="p-3 rounded-lg border-2 border-red-500 bg-red-100/50 shadow-sm">
+                            <p class="font-bold text-sm" style="color: #FF4E50;">Simple Prompt</p>
+                            <p class="text-xs italic text-gray-700 mt-1">"A is 2. B is 5. If I have A and C is 8, what is the final number?"</p>
+                        </div>
+                        <div class="p-3 rounded-lg border-2 border-green-500 bg-green-100/50 shadow-sm">
+                            <p class="font-bold text-sm" style="color: #FC913A;">CoT Prompt (Better)</p>
+                            <p class="text-xs italic text-gray-700 mt-1">"Let's break this down step-by-step. A is 2..."</p>
+                        </div>
+                        <div class="p-3 rounded-lg border-2 border-red-500 bg-red-100/50 shadow-sm col-span-1">
+                            <div class="text-2xl font-bold" style="color: #FF4E50;">10 (Wrong)</div>
+                        </div>
+                        <div class="p-3 rounded-lg border-2 border-green-500 bg-green-100/50 shadow-sm col-span-1">
+                            <div class="text-2xl font-bold" style="color: #FC913A;">10 (Correct)</div>
+                        </div>
+                        <p class="text-xs text-gray-500 italic col-span-2 mt-1">CoT guides the model to allocate more reasoning power, preventing careless errors.</p>
+                    </div>
+
+                    <h3 class="text-2xl font-bold mt-8 mb-4" style="color: #FF4E50;">Fine-Tuning: Alignment with RLHF</h3>
+                    <p class="text-gray-600 mb-4"><strong>Fine-Tuning</strong> is the secondary training phase that adapts the pre-trained model for specific tasks, safety, and conversational quality. The most critical component is <strong>Reinforcement Learning from Human Feedback (RLHF)</strong>, a multi-stage process designed to align the model's output with human values and helpfulness.</p>
+                    
+                    <h4 class="font-bold mt-4 text-center" style="color: #FC913A;">The RLHF Alignment Process</h4>
+                    <div class="flex justify-between items-center text-center mt-4 space-x-2">
+                        <!-- Step 1 -->
+                        <div class="flex-1 p-3 rounded-lg shadow-md bg-[#E1F5C4]">
+                            <p class="font-bold text-sm" style="color: #4B5563;">1. SFT (Supervised)</p>
+                            <p class="text-xs mt-1">Train model on human-written, ideal answers.</p>
+                        </div>
+                        <span class="text-xl" style="color: #FF4E50;">&#8594;</span>
+                        <!-- Step 2 -->
+                        <div class="flex-1 p-3 rounded-lg shadow-md bg-[#F9D423]">
+                            <p class="font-bold text-sm" style="color: #4B5563;">2. Reward Model</p>
+                            <p class="text-xs mt-1">Humans rank responses; this trains a separate model to score answers.</p>
+                        </div>
+                        <span class="text-xl" style="color: #FF4E50;">&#8594;</span>
+                        <!-- Step 3 -->
+                        <div class="flex-1 p-3 rounded-lg shadow-md bg-[#FF4E50] text-white">
+                            <p class="font-bold text-sm">3. PPO (RL)</p>
+                            <p class="text-xs mt-1">The main LLM is optimized to maximize the Reward score.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Context and Inference: Memory & Grounding</h3>
+                    <p class="text-gray-600 mb-4">The <strong>Context Window</strong> is the memory limit of the model, defining the maximum number of tokens it can process at any one time (both input and generated output). This limit dictates the model's ability to maintain <strong>long-range dependencies</strong>.</p>
+                    
+                    <h4 class="font-bold mt-4" style="color: #FC913A;">Retrieval-Augmented Generation (RAG)</h4>
+                    <p class="text-gray-600 mt-2 text-sm">RAG is a technique that connects an LLM to external, up-to-date data sources (like a company database or the latest news). It solves two critical problems: <strong>hallucination</strong> and <strong>knowledge cutoff</strong>.</p>
+
+                    <h4 class="font-bold mt-4 text-center" style="color: #FC913A;">Visualization: The RAG Flow</h4>
+                    <div class="flex justify-between items-center text-center space-x-2 mt-4">
+                        <div class="rag-node bg-[#FF4E50]">User Query</div>
+                        <span class="text-2xl" style="color: #FC913A;">&#8594;</span>
+                        <div class="rag-node bg-[#F9D423]">Retrieval (DB Search)</div>
+                        <span class="text-2xl" style="color: #FC913A;">&#8594;</span>
+                        <div class="rag-node">Context + Query</div>
+                        <span class="text-2xl" style="color: #FC913A;">&#8594;</span>
+                        <div class="rag-node bg-[#E1F5C4] text-gray-800">LLM Generates Answer</div>
+                    </div>
+
+                    <p class="text-gray-600 mt-4 text-sm"><strong>Inference & Quantization:</strong> <strong>Inference</strong> is the deployment phase where the model generates answers in real-time. To make this cost-effective, <strong>Quantization</strong> is used, shrinking the model's size (e.g., from 32-bit to 8-bit precision) to reduce memory usage and increase processing speed with minimal impact on output quality.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: SCOPE & ETHICS -->
+        <div id="tab4" class="tab-content hidden">
+            <h2 class="text-3xl font-bold mb-6 text-center" style="color: #FC913A;">Scope, Evaluation, and Responsibility</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <div class="lg:col-span-1 bg-white rounded-xl shadow-xl p-6 flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4 text-center" style="color: #FF4E50;">Evaluation and Performance</h3>
+                    <p class="text-center text-gray-600 mb-4">Measuring the quality of an LLM is complex and requires various metrics, as there is no single "score" that defines a model's goodness.</p>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-3 mt-2">
+                        <li><strong>Perplexity (PPL):</strong> This is a core metric of the language model objective. It measures how surprised the model is by the next word in a test set. <strong>Lower PPL is better</strong>, meaning the model has a very good grasp of the language structure and is confident in its predictions.</li>
+                        <li><strong>BLEU Score:</strong> Primarily used to evaluate the quality of translations or summarizations. It compares the generated text against a set of human-written reference translations, counting overlapping words.</li>
+                        <li><strong>Accuracy:</strong> The standard metric for tasks with clear right/wrong answers, such as multiple-choice questions or simple classification (e.g., sentiment analysis).</li>
+                        <li><strong>Generalization:</strong> This qualitative assessment ensures the model learned underlying <strong>concepts</strong> during pre-training, rather than just memorizing its training data. A model that generalizes can perform well on completely new, unseen tasks.</li>
+                    </ul>
+                    <div class="chart-container">
+                        <canvas id="evaluationChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-xl p-6">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF4E50;">Multi-Modality</h3>
+                    <p class="text-gray-600 mb-4"><strong>Multi-Modality</strong> refers to models capable of processing and generating content across different data types simultaneously—e.g., <strong>Text, Image, and Audio</strong>. The key is that the model can translate different types of data into a single, common <strong>embedding space</strong>. A vector for the text "A soaring eagle" is numerically close to the vector derived from an image of a soaring eagle.</p>
+                    <p class="text-gray-600 mt-4 text-sm">This deep connection allows for powerful cross-contextual tasks:</p>
+                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-1 mt-2">
+                        <li><strong>Caption Generation:</strong> Input an image; output a descriptive text.</li>
+                        <li><strong>Visual Question Answering (VQA):</strong> Input an image and a question ("What color is the car?"), and the model correctly extracts the answer from the visual data.</li>
+                        <li><strong>Code from Sketch:</strong> Interpreting a hand-drawn diagram and outputting functional code.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold mt-8 mb-4" style="color: #FF4E50;">Ethical & Social Issues: Responsible AI</h3>
+                    <p class="text-gray-600 mb-6">Given the immense power of LLMs, <strong>Responsible AI</strong> practices are critical to acknowledge and mitigate risks:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                        <div class="p-3 rounded-lg border-2 border-red-400 bg-red-50 shadow-md">
+                            <p class="font-bold">Data Bias & Fairness</p>
+                            <p class="text-sm mt-1">Models amplify societal biases (e.g., gender, race) present in the training data, leading to <strong>unfair</strong> or stereotypical outputs (e.g., suggesting only men for high-level jobs). Alignment and filtering attempt to combat this but are ongoing challenges.</p>
+                        </div>
+                        <div class="p-3 rounded-lg border-2 border-yellow-400 bg-yellow-50 shadow-md">
+                            <p class="font-bold">Hallucination & Misinformation</p>
+                            <p class="text-sm mt-1">The model prioritizes generating fluent text based on probability, which can result in confident, yet factually false, statements (<strong>hallucination</strong>). This capability accelerates the spread of <strong>misinformation</strong> and deepfakes.</p>
+                        </div>
+                        <div class="p-3 rounded-lg border-2 border-green-400 bg-green-50 shadow-md">
+                            <p class="font-bold">Privacy & PII Risk</p>
+                            <p class="text-sm mt-1">If the training data contained publicly available private information (PII), the model might inadvertently reproduce it. Furthermore, user inputs during inference can expose sensitive data if not handled securely.</p>
+                        </div>
+                        <div class="p-3 rounded-lg border-2 border-orange-400 bg-orange-50 shadow-md">
+                            <p class="font-bold">Explainability ("The Black Box")</p>
+                            <p class="text-sm mt-1">The scale (billions of parameters) and complexity of the model make it virtually impossible to trace exactly *why* it arrived at a specific decision or output, which is problematic in sensitive fields like law or medicine.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 p-6 text-center">
+        <p>Generative AI Essentials: Making complexity accessible.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            // --- Chart Utility Functions ---
+            const wrapLabels = (label) => {
+                const max = 16;
+                if (label.length <= max) {
+                    return label;
+                }
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).trim().length > max) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                }
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+
+            const chartColors = ['#FF4E50', '#FC913A', '#F9D423', '#EDE574', '#E1F5C4'];
+            window.charts = {};
+
+            const initializeCharts = (tabId) => {
+                window.charts[tabId] = {};
+                
+                // --- Tab 1 Charts ---
+                if (tabId === 'tab1') {
+                    // Chart 1: Tokenization Doughnut Chart
+                    const ctx1 = document.getElementById('tokenizationChart').getContext('2d');
+                    window.charts[tabId].chart1 = new Chart(ctx1, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Common Words (1 token)', 'Subword Units (BPE)', 'Special Tokens (e.g., [CLS])'],
+                            datasets: [{
+                                label: 'Token Composition',
+                                data: [65, 30, 5],
+                                backgroundColor: chartColors,
+                                borderColor: '#ffffff',
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'bottom' },
+                                tooltip: {
+                                    callbacks: {
+                                        title: tooltipTitleCallback
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Token Composition in an Example Text'
+                                }
+                            }
+                        }
+                    });
+
+                    // Chart 2: Word Embeddings Scatter Plot (Improved Robustness)
+                    const ctx2 = document.getElementById('embeddingsChart').getContext('2d');
+                    window.charts[tabId].chart2 = new Chart(ctx2, {
+                        type: 'scatter',
+                        data: {
+                            datasets: [
+                                {
+                                    label: 'Royalty (People)',
+                                    data: [
+                                        { x: 5, y: 8, label: 'King' },
+                                        { x: 4.5, y: 7, label: 'Queen' },
+                                        { x: 5.5, y: 6.8, label: 'Prince' },
+                                        { x: 4.8, y: 7.8, label: 'Princess' }
+                                    ],
+                                    backgroundColor: '#FF4E50', // Red
+                                    pointRadius: 8,
+                                    pointStyle: 'circle', 
+                                },
+                                {
+                                    label: 'Vehicles (Objects)',
+                                    data: [
+                                        { x: 2, y: 3, label: 'Car' },
+                                        { x: 2.5, y: 3.5, label: 'Truck' },
+                                        { x: 1.8, y: 2.8, label: 'Motorcycle' },
+                                        { x: 2.3, y: 3.2, label: 'Sedan' }
+                                    ],
+                                    backgroundColor: '#F9D423', // Yellow
+                                    pointRadius: 8,
+                                    pointStyle: 'triangle', 
+                                },
+                                {
+                                    label: 'Emotions (Abstract)',
+                                    data: [
+                                        { x: 8, y: 2, label: 'Happy' },
+                                        { x: 7.5, y: 2.5, label: 'Joyful' },
+                                        { x: 8.5, y: 1.8, label: 'Excited' },
+                                        { x: 7.8, y: 2.2, label: 'Delight' }
+                                    ],
+                                    backgroundColor: '#FC913A', // Orange
+                                    pointRadius: 8,
+                                    pointStyle: 'rect', 
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    display: true,
+                                    grid: { display: false },
+                                    title: { display: true, text: 'Semantic Axis 1' }
+                                },
+                                y: {
+                                    display: true,
+                                    grid: { display: false },
+                                    title: { display: true, text: 'Semantic Axis 2' }
+                                }
+                            },
+                            plugins: {
+                                legend: { position: 'bottom' },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.raw.label;
+                                        },
+                                        title: tooltipTitleCallback 
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Vector Space: Words with Similar Meanings Cluster Together'
+                                }
+                            }
+                        }
+                    });
+                }
+                
+                // --- Tab 2 Charts ---
+                if (tabId === 'tab2') {
+                    // Chart 3: Transformer Comparison Bar Chart
+                    const transformerLabels = ['RNNs', 'LSTMs', 'Transformers'];
+                    const transformerData = {
+                        labels: transformerLabels,
+                        datasets: [
+                            {
+                                label: 'Parallel Processing Score (Efficiency)',
+                                data: [1, 2, 10],
+                                backgroundColor: '#FF4E50',
+                            },
+                            {
+                                label: 'Long-Range Context Score',
+                                data: [3, 6, 10],
+                                backgroundColor: '#F9D423',
+                            }
+                        ]
+                    };
+                    const ctx3 = document.getElementById('transformerArchitectureChart').getContext('2d');
+                    window.charts[tabId].chart3 = new Chart(ctx3, {
+                        type: 'bar',
+                        data: transformerData,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            indexAxis: 'y',
+                            scales: {
+                                x: {
+                                    stacked: true,
+                                    title: { display: true, text: 'Relative Capability Score (Max 10)' }
+                                },
+                                y: {
+                                    stacked: true
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                    title: tooltipTitleCallback
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Architectural Leap: Transformers vs. Older Models',
+                                    font: { size: 16 }
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // --- Tab 3 Charts ---
+                if (tabId === 'tab3') {
+                    // Chart 4: Training Data Bar Chart
+                    const ctx4 = document.getElementById('trainingDataChart').getContext('2d');
+                    window.charts[tabId].chart4 = new Chart(ctx4, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Web Text (Common Crawl)', 'Books & Archives', 'Code Repositories', 'Academic Papers'],
+                            datasets: [{
+                                label: 'Proportion in Training Corpus (%)',
+                                data: [60, 15, 10, 5],
+                                backgroundColor: chartColors,
+                            }]
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                    title: tooltipTitleCallback
+                                    }
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Example Composition of Pre-training Data'
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // --- Tab 4 Charts ---
+                if (tabId === 'tab4') {
+                    // Chart 5: Evaluation Radar Chart
+                    const rawEvaluationLabels = ['Perplexity (Lower is better)', 'BLEU Score (Translation/Summary)', 'Accuracy (Classification)', 'Generalization (New Tasks)', 'Efficiency (Speed/Cost)'];
+                    const ctx5 = document.getElementById('evaluationChart').getContext('2d');
+                    window.charts[tabId].chart5 = new Chart(ctx5, {
+                        type: 'radar',
+                        data: {
+                            labels: rawEvaluationLabels.map(wrapLabels),
+                            datasets: [{
+                                label: 'Ideal LLM Profile',
+                                data: [3, 8, 9, 8, 7],
+                                fill: true,
+                                backgroundColor: 'rgba(255, 78, 80, 0.2)',
+                                borderColor: '#FF4E50',
+                                pointBackgroundColor: '#FF4E50',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: '#FF4E50'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                r: {
+                                    angleLines: { display: true },
+                                    suggestedMin: 0,
+                                    suggestedMax: 10,
+                                    pointLabels: { font: { size: 10 } }
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                    title: tooltipTitleCallback
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            };
+            // --- End Chart Functions ---
+
+            const showTab = (tabId) => {
+                contents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.style.backgroundColor = '';
+                    tab.style.color = '#4B5563';
+                    tab.style.boxShadow = 'none';
+                });
+
+                document.getElementById(tabId).classList.remove('hidden');
+                const activeTabButton = document.querySelector(`[data-tab="${tabId}"]`);
+                activeTabButton.classList.add('active');
+                activeTabButton.style.backgroundColor = '#FF4E50';
+                activeTabButton.style.color = '#ffffff';
+                activeTabButton.style.boxShadow = '0 4px 10px rgba(255, 78, 80, 0.5)';
+
+                // Re-initialize or resize charts when the tab becomes visible
+                if (window.charts && window.charts[tabId]) {
+                    Object.values(window.charts[tabId]).forEach(chart => chart.resize());
+                } else {
+                    initializeCharts(tabId);
+                }
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    showTab(tab.dataset.tab);
+                });
+            });
+
+            // Initialize the default tab
+            showTab('tab1');
+        });
+    </script>
+</body>
+</html>
